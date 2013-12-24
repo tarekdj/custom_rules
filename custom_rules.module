@@ -1,0 +1,50 @@
+<?php
+/**
+ * Implements hook_rules_action_info().
+ */
+function custom_rules_rules_action_info() {
+  $actions = array(
+    'create_custom_user' => array(
+      'label' => t('Create custom user'),
+      'group' => t('My custom actions'),
+      'parameter' => array(
+        // User login.
+        'login' => array(
+          'type' => 'text',
+          'label' => t('Login'),
+          'description' => t("The user's login."),
+        ),
+        // User password.
+        'password' => array(
+          'type' => 'text',
+          'label' => t('Password'),
+          'description' => t("The user's password."),
+        ),
+        // User email.
+        'email' => array(
+          'type' => 'text',
+          'label' => t('Email'),
+          'description' => t("The user's email."),
+        ),
+      ),
+    ),
+  );
+  return $actions;
+}
+
+/**
+ * Create custom user.
+ */
+function create_custom_user($login, $password,$email) {
+  $fields = array(
+    'name' => $login,
+    'mail' => $email,
+    'pass' => $password,
+    'status' => 1,
+    'init' => 'email address',
+    'roles' => array(
+      DRUPAL_AUTHENTICATED_RID => 'authenticated user',
+    ),
+  );
+  $account = user_save('', $fields);
+}
