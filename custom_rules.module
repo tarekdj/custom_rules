@@ -3,8 +3,7 @@
  * Implements hook_rules_action_info().
  */
 function custom_rules_rules_action_info() {
-  $actions = array(
-    'create_custom_user' => array(
+    $actions['create_custom_user'] = array(
       'label' => t('Create custom user'),
       'group' => t('My custom actions'),
       'parameter' => array(
@@ -27,13 +26,30 @@ function custom_rules_rules_action_info() {
           'description' => t("The user's email."),
         ),
       ),
-    ),
-  );
+    );
+    $actions['add_password'] = array(
+      'label' => t('Generate a password'),
+      'group' => t('My custom actions'),
+      'parameter' => array(
+        // Password's length.
+        'length' => array(
+          'type' => 'integer',
+          'label' => t('Password lenght'),
+          'description' => t('Password lenght'),
+        ),
+      ),
+      'provides' => array(
+        'password_added' => array(
+          'type' => 'unknown',
+          'label' => t('Generated password'),
+        ),
+      ),
+    );
   return $actions;
 }
 
 /**
- * Create custom user.
+ * Action: Create custom user.
  */
 function create_custom_user($login, $password,$email) {
   $fields = array(
@@ -47,4 +63,12 @@ function create_custom_user($login, $password,$email) {
     ),
   );
   $account = user_save('', $fields);
+}
+
+/**
+ * Action: Generate a password.
+ */
+function add_password($length) {
+  $passwd = user_password($length);
+  return array('password_added' => $passwd);
 }
