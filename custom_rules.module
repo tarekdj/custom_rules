@@ -40,7 +40,7 @@ function custom_rules_rules_action_info() {
       ),
       'provides' => array(
         'password_added' => array(
-          'type' => 'unknown',
+          'type' => 'text',
           'label' => t('Generated password'),
         ),
       ),
