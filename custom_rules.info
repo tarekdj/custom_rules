@@ -2,3 +2,5 @@ name = Custom Rules
 description = Creates an action to generate user with custom login and password
 package = Rules
 core = 7.x
+dependencies[] = rules
+dependencies[] = content_access
