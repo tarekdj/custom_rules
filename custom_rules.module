@@ -26,6 +26,12 @@ function custom_rules_rules_action_info() {
           'description' => t("The user's email."),
         ),
       ),
+      'provides' => array(
+        'user_added' => array(
+          'type' => 'integer',
+          'label' => t('Generated user'),
+        ),
+      ),
     );
     $actions['add_password'] = array(
       'label' => t('Generate a password'),
@@ -63,6 +69,7 @@ function create_custom_user($login, $password,$email) {
     ),
   );
   $account = user_save('', $fields);
+  return $account->uid;
 }
 
 /**
