@@ -28,7 +28,7 @@ function custom_rules_rules_action_info() {
       ),
       'provides' => array(
         'user_added' => array(
-          'type' => 'integer',
+          'type' => 'user',
           'label' => t('Generated user'),
         ),
       ),
@@ -69,7 +69,7 @@ function create_custom_user($login, $password,$email) {
     ),
   );
   $account = user_save('', $fields);
-  return $account->uid;
+  return $account;
 }
 
 /**
