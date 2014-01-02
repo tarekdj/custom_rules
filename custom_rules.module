@@ -26,6 +26,7 @@ function custom_rules_rules_action_info() {
           'description' => t("The user's email."),
         ),
       ),
+	  // Providing the created user.
       'provides' => array(
         'user_added' => array(
           'type' => 'user',
@@ -44,6 +45,7 @@ function custom_rules_rules_action_info() {
           'description' => t('Password lenght'),
         ),
       ),
+	  // Providing the password.
       'provides' => array(
         'password_added' => array(
           'type' => 'text',
@@ -69,7 +71,7 @@ function create_custom_user($login, $password,$email) {
     ),
   );
   $account = user_save('', $fields);
-  return $account;
+  return array('user_added' => $account);
 }
 
 /**
